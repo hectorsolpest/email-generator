@@ -58,34 +58,31 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: 'SuccessView',
-  data() {
-    return {
-      copyMessage: false
-    }
-  },
-  computed: {
-    generatedEmail() {
-      return this.$route.query.email || 'No se generó email'
-    }
-  },
-  methods: {
-    goHome() {
-      this.$router.push('/')
-    },
-    async copyEmail() {
-      try {
-        await navigator.clipboard.writeText(this.generatedEmail)
-        this.copyMessage = true
-        setTimeout(() => {
-          this.copyMessage = false
-        }, 2000)
-      } catch (err) {
-        console.error('Error al copiar: ', err)
-      }
-    }
+<script setup>
+import { ref, computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+
+const route = useRoute()
+const router = useRouter()
+const copyMessage = ref(false)
+
+const generatedEmail = computed(() => {
+  return route.query.email || 'No se generó email'
+})
+
+const goHome = () => {
+  router.push('/')
+}
+
+const copyEmail = async () => {
+  try {
+    await navigator.clipboard.writeText(generatedEmail.value)
+    copyMessage.value = true
+    setTimeout(() => {
+      copyMessage.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('Error al copiar: ', err)
   }
 }
 </script>

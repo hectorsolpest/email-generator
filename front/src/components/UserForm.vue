@@ -64,50 +64,46 @@
   </form>
 </template>
 
-<script>
-export default {
-  name: 'UserForm',
-  data() {
-    return {
-      form: {
-        name: '',
-        password: ''
+<script setup>
+import { ref, reactive } from 'vue'
+
+const emit = defineEmits(['email-generated'])
+
+const form = reactive({
+  name: '',
+  password: ''
+})
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const API_URL = 'http://localhost:8000/api/formulario_registro'
+
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       },
-      loading: false,
-      error: ''
+      body: JSON.stringify(form)
+    })
+
+    const data = await response.json()
+
+    if (response.ok) {
+      emit('email-generated', data.email)
+    } else {
+      error.value = data.message || `Error ${response.status}: ${response.statusText}`
     }
-  },
-  methods: {
-    async submitForm() {
-      this.loading = true
-      this.error = ''
-
-      try {
-        const API_URL = 'http://localhost:8000/api/formulario_registro'
-
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify(this.form)
-        })
-
-        const data = await response.json()
-
-        if (response.ok) {
-          this.$emit('email-generated', data.email)
-        } else {
-          this.error = data.message || `Error ${response.status}: ${response.statusText}`
-        }
-      } catch (error) {
-        this.error = 'Error de conexión. Intenta nuevamente.'
-        console.error('Error de conexión:', error)
-      } finally {
-        this.loading = false
-      }
-    }
+  } catch (err) {
+    error.value = 'Error de conexión. Intenta nuevamente.'
+    console.error('Error de conexión:', err)
+  } finally {
+    loading.value = false
   }
 }
 </script>

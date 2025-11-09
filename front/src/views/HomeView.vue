@@ -15,21 +15,16 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { useRouter } from 'vue-router'
 import UserForm from '../components/UserForm.vue'
 
-export default {
-  name: 'HomeView',
-  components: {
-    UserForm
-  },
-  methods: {
-    handleEmailGenerated(email) {
-      this.$router.push({
-        name: 'success',
-        query: {email: email}
-      })
-    }
-  }
+const router = useRouter()
+
+const handleEmailGenerated = (email) => {
+  router.push({
+    name: 'success',
+    query: { email: email }
+  })
 }
 </script>
