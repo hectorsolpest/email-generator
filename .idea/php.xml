@@ -144,6 +144,7 @@
       <path value="$PROJECT_DIR$/back/vendor/brianium/paratest" />
       <path value="$PROJECT_DIR$/back/vendor/nette/schema" />
       <path value="$PROJECT_DIR$/back/vendor/nette/utils" />
+      <path value="$PROJECT_DIR$/back/vendor/_laravel_idea" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.2" />
