@@ -34,7 +34,7 @@ Prueba técnica que consiste en un sistema para generar automáticamente direcci
 
 ## 📸 Capturas de Pantalla
 ### Formulario de Registro
-![Formulario Principal](./capturas/Captura1.png)
+![Formulario Principal](./capturas/Captura1.PNG)
 
 ### Vista de Resultado
-![Formulario Principal](./capturas/Captura2.png)
+![Formulario Principal](./capturas/Captura2.PNG)
