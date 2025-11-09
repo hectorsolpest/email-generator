@@ -1,11 +1,11 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div class="min-h-screen flex items-center justify-center bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
-      <div>
-        <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+      <div class="text-center">
+        <h2 class="mt-6 text-3xl font-extrabold text-white">
           Generar Email
         </h2>
-        <p class="mt-2 text-center text-sm text-gray-600">
+        <p class="mt-2 text-sm text-gray-400">
           Ingresa tu nombre completo para generar tu email
         </p>
       </div>
@@ -25,10 +25,9 @@ export default {
   },
   methods: {
     handleEmailGenerated(email) {
-      // Navegar a la página de éxito con el email como parámetro
       this.$router.push({
         name: 'success',
-        query: { email: email }
+        query: {email: email}
       })
     }
   }
